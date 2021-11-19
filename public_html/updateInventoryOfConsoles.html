@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="design.css">
+
+    <title>Update Inventory of Consoles at Store Level</title>
+
+</head>
+
+</body>
+
+<div class="topNavigation">
+    <a href="./index.html">Index</a>
+    <a href="./customers.html">Customers</a>
+    <a href="./orders.html">Orders</a>
+    <a href="./games.html">Games</a>
+    <a class="on" href="./consoles.html">Consoles</a>
+    <a href="./stores.html">Stores</a>
+    <a href="./rewards.html">Rewards</a>
+</div>
+
+<br />
+<br />
+<br />
+
+
+<h2>Update a Console's Inventory at the Store Level</h2>
+
+<p>If left empty, the existing value will be used.</p>
+
+    <form action="./storesAndConsoles.html" method="POST">
+
+        <table>
+            <thead>
+              <tr>
+                <th><label>Store ID:
+                    <input type="number" name="store_ID" size="20" maxlength="70">
+                </label></th>
+                <th></th>
+                <th><label>Console ID:
+                    <input type="number" name="console_id" size="20" maxlength="70">
+                </label></th>
+                <th><label>Quantiy of Console at Store:
+                    <input type="number" name="quantity_of_console" size="20" maxlength="100">
+                </label></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
+  <br />
+
+    <button name = "submit" type="submit">Submit Changes</button>
+</form>
+
+</body>
+
+</html>

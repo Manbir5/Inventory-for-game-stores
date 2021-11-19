@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<head>
+   <link rel="stylesheet" href="design.css">
+
+    <title>Games and Consoles</title>
+
+</head>
+
+<body>
+
+  <div class="topNavigation">
+    <a href="./index.html">Index</a>
+    <a href="./customers.html">Customers</a>
+    <a href="./orders.html">Orders</a>
+    <a class="on" href="./games.html">Games</a>
+    <a href="./consoles.html">Consoles</a>
+    <a href="./stores.html">Stores</a>
+    <a href="./rewards.html">Rewards</a>
+</div>
+
+<br />
+<br />
+<br />
+
+<h2>Search</h2>
+<p>Search for games by console main name.</p>
+
+<fieldset>
+
+<form action="./gamesAndConsoles.html" method="POST">
+
+      <label>Console main name:
+          <input type="text" name="console_main_name">
+      </label>
+  <br />
+  <br />
+  <button name="submit" type="submit">Search</button>
+</form>
+</fieldset>
+
+<br />
+
+
+<h2>Add a Game - Console Relationship</h2>
+
+<p>If left empty, the existing value will be used.</p>
+
+    <form action="./gamesAndConsoles.html" method="POST">
+
+        <table>
+            <thead>
+              <tr>
+                <th><label>Console Main Name:
+                    <input type="text" name="store_ID" size="30" maxlength="70">
+                </label></th>
+                <th><label>Game Title:
+                    <input type="text" name="console_id" size="30" maxlength="70">
+                </label></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
+  <br />
+  <br />
+
+<h2>Availability of games by console</h2>
+
+<table>
+    <thead>
+      <tr>
+        <th>Console Main Name</th>
+        <th>Game Tite</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PS4</td>
+        <td>Farcry 5</td>
+        <td><form action="./updateGamesByConsole.html" method="POST">
+          <button name="updateGamesConsoles" type="submit"> Update</button></form></td>
+        <td><form action="./gamesAndConsoles.html" method="POST"><button name="delete" type="submit">Delete</button>
+        </form></td>  
+      </tr>
+      <tr>
+        <td>Xbox One</td>
+        <td>Farcry 5</td>
+        <td><form action="./updateGamesByConsole.html" method="POST">
+          <button name="updateGamesConsoles" type="submit"> Update</button></form></td>
+        <td><form action="./gamesAndConsoles.html" method="POST"><button name="delete" type="submit">Delete</button>
+        </form></td>    
+      <tr>
+        <td>Switch</td>
+        <td>Super Mario Odyssey</td>
+        <td><form action="./updateGamesByConsole.html" method="POST">
+          <button name="updateGamesConsoles" type="submit"> Update</button></form></td>
+        <td><form action="./gamesAndConsoles.html" method="POST"><button name="delete" type="submit">Delete</button>
+        </form></td>  
+      </tr>      </tr>
+    </tbody>
+  </table>
+
+</form>
+
+
+</body>
+
+</html>
