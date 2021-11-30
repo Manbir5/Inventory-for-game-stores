@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<head>
+     <link rel="stylesheet" href="/static/css/design.css">
+
+    <title>Order Details</title>
+
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="./index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a class="on" href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+
+  <h2>Search</h2>
+  <p>Search for an order using the order ID or customer ID.</p>
+  
+  <fieldset>
+    <form id ="search_orders" action="" method="">
+          <label>Order ID: </label>
+              <input id='order_id_search_string' type='text' name='order_id_search_string' value='' size="30" maxlength="100">
+          <input type="button" value="Search" onclick="searchOrdersByOrderID()"></form>
+          <br />
+           <form id ="search_orders_2" action="" method="">
+          <label>Customer ID:</label>
+              <input id='customer_id_search_string' type='text' name='customer_id_search_string' value='' size="30" maxlength="100">
+      <input type="button" value="Search" onclick="searchOrdersByCustomerID()">
+  </form>
+  </fieldset>
+
+<br />
+<h2>Add an Order</h2>
+
+<a class="button" href = "/addOrders">Submit an Order</a>
+
+<br />
+<br />
+
+<h2>Order Details</h2>
+
+<table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Total</th>
+        <th>Game Title</th>
+        <th>Store ID</th>
+        <th>Customer ID</th>
+        <th>Console ID</th>
+        <th>Delete</th>
+ 
+      </tr>
+    </thead>
+    <tbody>
+        {{#each orders}} 
+        <tr> 
+            <td>{{order_id}}</td> 
+            <td>{{order_total}}</td> 
+             <td>{{game_title}}</td> 
+             <td>{{store_id}}</td> 
+            <td>{{customer_id}}</td> 
+            <td>{{console_id}}</td> 
+            <td><button onclick= deleteOrders({{order_id}})>Delete</button></td>  
+          </form></td>  
+        </tr> 
+        {{/each}} 
+    </tbody>
+  </table>
+
+</form>
+
+
+
+</body>
+
+</html>

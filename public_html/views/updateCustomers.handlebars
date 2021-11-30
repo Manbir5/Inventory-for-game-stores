@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="/static/css/design.css">
+
+    <title>Update Customer</title>
+
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="/index.html">Index</a>
+        <a class = "on" href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+
+<br />
+<br />
+<br />
+
+
+<h2>Update {{singleCustomer.customer_first_name}} {{singleCustomer.customer_last_name}}:</h2>
+
+<p>If left unchanged, the existing value will be used.</p>
+
+    <form id = "updateCusto" action="/customers" method="POST">
+
+        <table>
+            <thead>
+              <tr>
+                <th><label>First name* : </label>
+                    <input type="text" name="first_name" size="20" maxlength="70" value="{{singleCustomer.customer_first_name}}" required>
+                </th>
+                <th></th>
+                <th><label>Last name* : </label>
+                    <input type="text" name="last_name" size="20" maxlength="70" value="{{singleCustomer.customer_last_name}}" required>
+                </th>
+                <th><label>Email: </label>
+                    <input type="text" name="email" size="20" maxlength="100" value="{{singleCustomer.customer_email}}">
+               </th>
+                <th><label>Phone Number*: </label>
+                    <input type="text" name="phone_number" size="20" maxlength="100" value="{{singleCustomer.customer_phone_number}}" required>
+               </th>
+                <th><label>Street Number: </label>
+                    <input type="number" name="streetnumber" size="20" maxlength="100" value="{{singleCustomer.customer_address_street_number}}">
+                </th>
+                <th><label>Street Name: </label>
+                    <input type="text" name="street_name" size="20" maxlength="100" value="{{singleCustomer.customer_address_street_address}}">
+                </th>
+                <th><label>Unit: </label>
+                    <input type="text" name="unit" size="20" maxlength="100" value="{{singleCustomer.customer_address_unit}}">
+                </th>
+                <th><label>City: </label>
+                    <input type="text" name="city" size="20" maxlength="100" value="{{singleCustomer.customer_address_city}}">
+                </th>
+                <th><label>Postal Code* : </label>
+                    <input type="text" name="postal_code" size="20" maxlength="100" value="{{singleCustomer.customer_address_postal_code}}" required>
+                </th>
+                <th><label>Province* : </label>
+                    <input type="text" name="province" size="20" maxlength="100" value="{{singleCustomer.customer_address_province}}" required>
+               </th>
+                <th><label>Country*: </label>
+                    <input type="text" name="country" size="20" maxlength="100" value="{{singleCustomer.customer_address_country}}" required>
+               </th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+  <br />
+  </form>
+    <button onclick ="updateCustomer({{singleCustomer.customer_id}})">Submit Changes</button>
+
+
+</body>
+
+</html>

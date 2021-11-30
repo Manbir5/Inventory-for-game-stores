@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="/static/css/design.css">
+
+    <title>Update Games and Consoles</title>
+
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="/index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a class ="on" href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+<br />
+<br />
+<br />
+
+
+<h2>Update {{getSingleGameAndConsoleRel.game_title}}:</h2>
+
+<p>If left unchanged, the existing value will be used.</p>
+
+    <form id = "update-Games-And-Consoles" action="/gamesAndConsoles" method="POST">
+
+        <table>
+            <thead>
+              <tr>
+                <th><label>Console ID: </label>
+                    <input type="" name="console_id"value="{{getSingleGameAndConsoleRel.console_id}}">
+                </th>
+                <th><label>Game title: </label>
+                    <input type="text" name="game_title" size="20" maxlength="70" value="{{getSingleGameAndConsoleRel.game_title}}}">
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+  <br />
+  </form>
+    <button onclick ="updateGamesAndConsoles({{getSingleGameAndConsoleRel.console_id}},'{{getSingleGameAndConsoleRel.game_title}}')">Submit Changes</button>
+
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<head>
+     <link rel="stylesheet" href="/static/css/design.css">
+
+    <title>Stores</title>
+
+</head>
+
+<body>
+    
+    <div class="topNavigation">
+        <a href="./index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a class="on" href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+
+<h2>Add a Store</h2>
+
+<a class="button" href = "/addStores">Add a Store</a>
+
+<br />
+<br />
+
+<h2>View inventory of games based on stores</h2>
+
+<a class="button" href = "stores/storesAndGames">View inventory of games</a>
+
+<br />
+<br />
+
+<h2>View inventory of consoles based on stores</h2>
+
+<a class="button" href = "stores/storesAndConsoles">View inventory of consoles</a>
+
+<br />
+<br />
+<br />
+
+<h2>Store Details</h2>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Store ID</th>
+      <th>City of Store</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each stores}} 
+      <tr> 
+      <td>{{store_id}}</td> 
+      <td>{{store_city}}</td>
+      <td><button onclick= deleteStores({{store_id}})>Delete</button></td>  
+      </tr> 
+      {{/each}} 
+  </tbody>
+</table>
+
+</body>
+
+</html>
+
+
+

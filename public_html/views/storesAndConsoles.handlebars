@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<head>
+      <link rel="stylesheet" href="/static/css/design.css">
+
+    <title>Inventory of Consoes</title>
+
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="/index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a class ="on" href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <h2>Search</h2>
+    <p>Search for the inventory of consoles using the console ID</p>
+
+    <fieldset>
+    <form id ="search_stores_and_consoles" action="" method="">
+          <label>Console ID: </label>
+              <input id='console_id_for_store_search_string' type='text' name='console_id_for_store_search_string' value='' size="30" maxlength="100">  
+          <input type="button" value="Search" onclick="searchStoresAndConsolesByConsoleId()">
+          <br />
+  </form>
+  </fieldset>
+  <br />
+
+  <h2>Add inventory for Consoles</h2>
+  <form action="/stores/storesAndConsoles" method="POST">
+
+      <table>
+          <thead>
+              <tr>
+                  <th><label>Store:  </label><select name ='stores'>
+                    {{#each stores}}
+                    <option value={{store_id}}>{{store_city}}</option>
+                    {{/each}}
+                </select></th>
+                  <th><label>Console:  </label><select name ='consoles'>
+                    {{#each consoles}}
+                    <option value={{cid}}>{{console_main_name}}</option>
+                    {{/each}}
+                    </select>
+                </th>
+                  <th><label>Quantity of Console at Store* :
+                      <input type="number" name="quantity_of_console_at_store" required>
+                  </label></th>
+              </tr>
+          </thead>
+          <tbody>
+          </tbody>
+      </table>
+      <br>
+      <button type='submit'>Add inventory</button>
+  </form>
+
+  <br />
+  <br />
+
+
+<h2>Inventory of Consoles Based on Stores</h2>
+
+<table>
+    <thead>
+      <tr>
+        <th>Store ID</th>
+        <th>Console ID</th>
+        <th>Quantity of Console at Store</th>
+        <th>Update</th>
+        <th>Delete<th>
+      </tr>
+    </thead>
+    <tbody>
+        {{#each storesAndConsoles}} 
+        <tr> 
+            <td>{{store_id}}</td> 
+            <td>{{console_id}}</td> 
+            <td>{{quantity_of_console_at_store}}</td> 
+            <td><form action="./updateInventoryOfConsoles.html" method="POST">
+            <button name="updateGames" type="submit"> Update</button></form></td>
+            <td><button onclick= "deleteStoresAndConsoles({{store_id}},{{console_id}})">Delete</button></td>
+      </tr>
+     {{/each}} 
+    </tbody>
+  </table>
+
+</form>
+
+
+<br />
+<br />
+
+<form action="/consoles" method="GET">
+
+<button name="console_reference" type="submit">Click here to view the consoles table</button>
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="/static/css/design.css">
+
+    <title>Update Console</title>
+
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="/index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a class = "on" href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+
+<br />
+<br />
+<br />
+
+
+<h2>Update {{singleConsole.console_main_name}} {{singleConsole.console_version}}:</h2>
+
+<p>If left unchanged, the existing value will be used.</p>
+
+    <form id = "updateConsole" action="/consoles" method="POST">
+
+        <table>
+            <thead>
+              <tr>
+                    <th><label>Console Company* : </label>
+                        <input type="text" name="console_company" required value="{{singleConsole.console_company}}" > 
+                    </th>
+                    <th><label>Console Main Name* : </label>
+                        <input type="text" name="console_main_name" required value="{{singleConsole.console_main_name}}">
+                   </th>
+                    <th><label>Console Version* : </label>
+                        <input type="text" name="console_version" required value="{{singleConsole.console_version}}">
+                   </th>
+                    <th><label>Console Price* : </label>
+                        <input type="number" name="console_price" required value="{{singleConsole.console_price}}">
+                    </th>
+                    <th><label>Console Quantity* : </label>
+                        <input type="number" name="console_quantity" required value="{{singleConsole.console_quantity}}">
+                   </th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+  <br />
+  </form>
+    <button onclick ="updateConsoles({{singleConsole.console_id}})">Submit Changes</button>
+
+
+</body>
+
+</html>

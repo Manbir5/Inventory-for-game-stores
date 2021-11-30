@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<head>
+     <link rel="stylesheet" href="/static/css/design.css">
+    <title>Add Game</title>
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="./index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a class = "on" href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <h2>Add a game</h2>
+    <form action="/addGames" method="POST">
+
+        <table>
+            <thead>
+                <tr>
+                    <th><label>Game title* :
+                        <input type="text" name="game_title" required>
+                    </label></th>
+                    <th><label>Game rating* :
+                        <input type="text" name="game_rating" required>
+                    </label></th>
+                    <th><label>Game genre:
+                        <input type="text" name="game_genre">
+                    </label></th>
+                    <th><label>Game price* :
+                        <input type="number" name="game_price" required>
+                    </label></th>
+                    <th><label>Game quantity* :
+                        <input type="number" name="game_quantity" required>
+                    </label></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <br>
+        <button type='submit'>Submit</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<head>
+     <link rel="stylesheet" href="/static/css/design.css">
+    <title>Add Console</title>
+</head>
+
+<body>
+    <div class="topNavigation">
+        <a href="./index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a class="on" href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+
+    <h2>Add a console</h2>
+    <form action="/addConsoles" method="POST">
+
+        <table>
+            <thead>
+                <tr>
+                    <th><label>Console Company* :
+                        <input type="text" name="console_company" required>
+                    </label></th>
+                    <th><label>Console Main Name* :
+                        <input type="text" name="console_main_name" required>
+                    </label></th>
+                    <th><label>Console Version* :
+                        <input type="text" name="console_version" required>
+                    </label></th>
+                    <th><label>Console Price* :
+                        <input type="number" name="console_price" required>
+                    </label></th>
+                    <th><label>Console Quantity* :
+                        <input type="number" name="console_quantity" required>
+                    </label></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <br>
+        <button type='submit'>Add Console</button>
+    </form>
+</body>
+</html>

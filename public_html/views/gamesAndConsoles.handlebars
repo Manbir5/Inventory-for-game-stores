@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="/static/css/design.css">
+
+    <title>Games and Consoles</title>
+
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="/index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a class ="on" href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+
+<br />
+<br />
+<br />
+
+<h2>Search</h2>
+<p>Search for a certain game by the game title</p>
+
+  <fieldset>
+    <form id ="search_games_and_consoles" action="" method="">
+          <label>Game Title: </label>
+              <input id='game_title_for_console_search_string' type='text' name='game_title_for_console_search_string' value='' size="30" maxlength="100">  
+          <input type="button" value="Search" onclick="searchGamesAndConsolesByGameTitle()">
+          <br />
+  </form>
+  </fieldset>
+
+<br />
+
+
+<h2>Add a Game - Console Relationship</h2>
+
+    <form action="/games/gamesAndConsoles" method="POST">
+
+        <table>
+            <thead>
+              <tr>
+                <th><label>Console:  </label><select name ='consoles'>
+            {{#each consoles}}
+            <option value={{cid}}>{{console_main_name}}</option>
+            {{/each}}
+            </select>
+              </th>
+                <th><label>Game:  </label><select name ='games'>
+            {{#each games}}
+            <option value='{{game_title}}'>{{game_title}}</option>
+            {{/each}}
+            </select>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <br>
+          <button type='submit'>Submit</button> </form>
+
+  <br />
+  <br />
+
+<h2>Games and consoles they can be played on</h2>
+
+<table>
+    <thead>
+      <tr>
+        <th>Console ID</th>
+        <th>Game Title</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        {{#each gamesAndConsoles}} 
+        <tr> 
+            <td>{{console_id}}</td> 
+            <td>{{game_title}}</td> 
+            <td><a href="gamesAndConsoles/{{console_id}}/{{game_title}}">Update</a></td>
+            <td><button onclick= "deleteGamesAndConsoles({{console_id}},'{{game_title}}')">Delete</button></td>  
+        </tr> 
+        {{/each}} 
+    </tbody>
+  </table>
+
+</form>
+
+
+</body>
+
+</html>

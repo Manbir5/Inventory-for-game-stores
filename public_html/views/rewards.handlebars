@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<head>
+     <link rel="stylesheet" href="/static/css/design.css">
+    <title>Customer Reward Programs</title>
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="./index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a class ="on" href="/rewards">Rewards</a>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+
+<h2>Search</h2>
+    <p>Search for a reward program by account number.</p>
+
+  <fieldset>
+    <form id ="search_rewards" action="" method="">
+          <label class = "label">Account Number: </label>
+              <input id='account_number_search_string' type='text' name='account_number_name_search_string' value='' size="30" maxlength="100">  
+          <input type="button" value="Search" onclick="searchRewardsByAccountNumber()">
+          <br />
+  </form>
+  </fieldset>
+<br />
+<h2>Add a Reward Account</h2> 
+
+<a class="button" href = "/addRewards">Add a Reward Account</a>
+
+<br />
+<br />
+
+<h2>Reward Details</h2> 
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Account Number</th>
+                <th>Customer ID</th>
+                <th>Reward Points</th>
+                <th>Order Id</th>
+                <th>Redeemed Item</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each rewards}} 
+        <tr> 
+            <td>{{account_number}}</td> 
+            <td>{{customer_id}}</td> 
+            <td>{{reward_points}}</td> 
+            <td>{{order_id}}</td> 
+            <td>{{redeemed_item}}</td> 
+            <td><button onclick= deleteRewards({{account_number}})>Delete</button></td> 
+        </tr> 
+        {{/each}} 
+        </tbody>
+    </table><br>
+</body>

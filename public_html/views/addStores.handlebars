@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<head>
+     <link rel="stylesheet" href="/static/css/design.css">
+    <title>Add Store</title>
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="./index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a class = "on" href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <h2>Add a store</h2>
+
+    <form action="/addStores" method="POST">
+    
+        <table>
+            <thead>
+              <tr>
+                <th><label>Store City* :
+                    <input type="text" name="store_city" size="20" maxlength="70" required>
+                </label></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
+          <br />
+          <br />
+    
+    <button name="submitStoreChanges" type="submit">Add a Store</button>
+    
+    </form>
+
+</body>
+</html>

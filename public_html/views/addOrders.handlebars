@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<head>
+     <link rel="stylesheet" href="/static/css/design.css">
+
+    <title>Add an Order</title>
+
+</head>
+
+</body>
+
+    <div class="topNavigation">
+        <a href="./index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a class="on" href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+<br />
+<br />
+<br />
+
+
+<h2>Add an Order</h2>
+
+
+<form id="addOrder" action="/addOrders" method="POST">
+
+<table>
+    <thead>
+      <tr>
+        <th><label>Order Total* : </label>
+            <input type="number" name="order_total" size="20" maxlength="70" required>
+        </th>
+        <th><label>Game: </label><select name ='games'>
+            {{#each games}}
+            <option value='{{game_title}}'>{{game_title}}</option>
+            {{/each}}
+            <option value ="">N/a</option>
+            </select>
+        </th>
+        <th><label>Store* : </label></label><select name ='stores' required>
+            {{#each stores}}
+            <option value={{sid}}>{{store_city}}</option>
+            {{/each}}
+            </select>
+        </th>
+        <th><label>Customer ID* : </label>
+            <input type="number" name="customer_id" size="20" maxlength="100" required>
+        </th>
+        <th><label>Console: </label><select name ='consoles'>
+            {{#each consoles}}
+            <option value={{id}}>{{console_main_name}}</option>
+            {{/each}}
+            <option value ="">N/a</option>
+            </select>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <br />
+
+    <button name="submit" type="submit">Submit</button>
+</form>
+
+</body>
+
+</html>

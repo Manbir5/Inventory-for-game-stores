@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<head>
+     <link rel="stylesheet" href="/static/css/design.css">
+    <title>Console Details</title>
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="./index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a class ="on" href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a href="/rewards">Rewards</a>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    
+
+    <h2>Search</h2>
+    <p>Search for a console by name</p>
+  <fieldset>
+    <form id ="search_consoles" action="" method="">
+          <label class = "label">Console Name: </label>
+              <input id='console_main_name_search_string' type='text' name='console_main_name_search_string' value='' size="30" maxlength="100">  
+          <input type="button" value="Search" onclick="searchConsolesByConsoleName()">
+          <br />
+  </form>
+  </fieldset>
+
+    <br />
+    <h2>Add a Console</h2> 
+
+    <a class="button" href = "/addConsoles">Add a Console</a>
+
+    <br />
+    <br />
+    
+    <h2>Console details</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Console ID</th>
+                <th>Company</th>
+                <th>Main name</th>
+                <th>Version</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each consoles}} 
+        <tr> 
+            <td>{{console_id}}</td> 
+            <td>{{console_company}}</td> 
+             <td>{{console_main_name}}</td> 
+             <td>{{console_version}}</td> 
+            <td>{{console_price}}</td> 
+            <td>{{console_quantity}}</td> 
+            <td><a href="/consoles/{{console_id}}">Update</a></td>
+            <td><button onclick= deleteConsoles({{console_id}})>Delete</button></td>  
+        </tr> 
+        {{/each}} 
+        </tbody>
+    </table><br>
+
+</body>

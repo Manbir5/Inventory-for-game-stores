@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<head>
+     <link rel="stylesheet" href="/static/css/design.css">
+    <title>Add Rewards</title>
+</head>
+
+<body>
+
+    <div class="topNavigation">
+        <a href="./index.html">Index</a>
+        <a href="/customers">Customers</a>
+        <a href="/orders">Orders</a>
+        <a href="/games">Games</a>
+        <a href="/consoles">Consoles</a>
+        <a href="/stores">Stores</a>
+        <a class = "on" href="/rewards">Rewards</a>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <h2>Add rewards</h2>
+    <form action="/addRewards" method="POST">
+
+        <table>
+            <thead>
+                <tr>
+                    <th><label>Customer ID* :
+                        <input type="number" name="customer_id" required>
+                    </label></th>
+                    <th><label>Reward Points:
+                        <input type="number" name="rewards_points">
+                    </label></th>
+                    <th><label>Order ID* :
+                        <input type="number" name="order_id" required>
+                    </label></th>
+                    <th><label>Redeemed Item:
+                        <input type="text" name="redeemed_item">
+                    </label></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <br>
+        <button type='submit'>Submit</button>
+    </form>
+</body>
+</html>
