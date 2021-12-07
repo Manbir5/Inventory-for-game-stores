@@ -13,8 +13,8 @@ var handlebars = require('express-handlebars').create({
         })
 
 app.engine('handlebars', handlebars.engine);
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/static', express.static('public'));
 app.set('view engine', 'handlebars');
@@ -32,6 +32,7 @@ app.use('/stores', require('./stores.js'));
 app.use('/addStores', require('./addStores.js'));
 app.use('/rewards', require('./rewards.js'));
 app.use('/addRewards', require('./addRewards.js'));
+app.use('/errors', require('./errors.js'));
 app.use('/', express.static('public'));
 
 app.use(function(req,res){

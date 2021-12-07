@@ -45,7 +45,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteOrders.js","filterpeople.js","searchOrders.js"];
+        context.jsscripts = ["deleteOrders.js","searchOrders.js"];
         var mysql = req.app.get('mysql');
         getOrders(res, mysql, context, complete);
         function complete(){
@@ -58,11 +58,22 @@ module.exports = function(){
     });
 
 
-    
+    router.get('/search', function(req,res){
+        var context ={};
+        res.redirect('/orders');
+    })
+
+
+    router.get('/search2', function(req,res){
+        var context ={};
+        res.redirect('/orders');
+    })
+
+
         router.get('/search/:s', function(req, res){
             var callbackCount = 0;
             var context = {};
-            context.jsscripts = ["deleteOrders.js","filterpeople.js","searchOrders.js"];
+            context.jsscripts = ["deleteOrders.js","searchOrders.js"];
             var mysql = req.app.get('mysql');
             getOrdersWithOrderIDLike(req, res, mysql, context, complete);
             function complete(){
@@ -73,10 +84,11 @@ module.exports = function(){
             }
         });
 
+
         router.get('/search2/:s', function(req, res){
             var callbackCount = 0;
             var context = {};
-            context.jsscripts = ["deleteOrders.js","filterpeople.js","searchOrders.js"];
+            context.jsscripts = ["deleteOrders.js","searchOrders.js"];
             var mysql = req.app.get('mysql');
             getOrdersWithCustomerIDLike(req, res, mysql, context, complete);
             function complete(){
@@ -87,6 +99,7 @@ module.exports = function(){
             }
         });
     
+
         router.delete('/:order_id', function(req, res){
             var mysql = req.app.get('mysql');
             var sql = "DELETE FROM Orders WHERE order_id = ?";
@@ -103,5 +116,6 @@ module.exports = function(){
             })
         })
   
+        
     return router;
 }();

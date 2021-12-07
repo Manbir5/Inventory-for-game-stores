@@ -14,6 +14,17 @@ module.exports = function(){
         });
     }
 
+    function getCustomers(res, mysql, context, complete){
+        mysql.pool.query("SELECT customer_id, customer_first_name, customer_last_name FROM Customers", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.customers = results;
+            complete();
+        });
+    }
+
     function getStores(res, mysql, context, complete){
         mysql.pool.query("SELECT store_id as sid, store_city FROM Stores", function(error, results, fields){
             if(error){
@@ -43,9 +54,10 @@ module.exports = function(){
         getConsoles(res, mysql, context, complete);
         getGames(res, mysql, context, complete);
         getStores(res, mysql, context, complete);
+        getCustomers(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 3){
+            if(callbackCount >= 4){
         res.render('addOrders', context);
             }
         }
@@ -67,12 +79,11 @@ module.exports = function(){
             placeholder_for_game = req.body.games
         }
         var sql = "INSERT INTO Orders(order_total, game_title, store_id, customer_id, console_id) VALUES (?,?,?,?,?)";
-        var inserts = [req.body.order_total, placeholder_for_game, req.body.stores, req.body.customer_id, placeholder_for_console];
+        var inserts = [req.body.order_total, placeholder_for_game, req.body.stores, req.body.customers, placeholder_for_console];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
-                res.write(JSON.stringify(error));
-                res.end();
+                res.redirect('/errors');
             }else{
                 res.redirect('/orders');
             }

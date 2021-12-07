@@ -85,7 +85,7 @@
         <tr> 
             <td>{{console_id}}</td> 
             <td>{{game_title}}</td> 
-            <td><a href="gamesAndConsoles/{{console_id}}/{{game_title}}">Update</a></td>
+             <td><button onclick= "updateRoute({{console_id}},'{{game_title}}')">Update</button></td>  
             <td><button onclick= "deleteGamesAndConsoles({{console_id}},'{{game_title}}')">Delete</button></td>  
         </tr> 
         {{/each}} 

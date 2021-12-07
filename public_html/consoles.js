@@ -13,6 +13,7 @@ module.exports = function(){
         });
     }
 
+
     function getSingleConsole(res, mysql, context, id, complete){
         var sql = " SELECT console_id, console_company, console_main_name, console_version, console_price, console_quantity FROM Consoles WHERE console_id = ?";
         var inserts = [id];
@@ -40,10 +41,11 @@ module.exports = function(){
           });
       }
 
+
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteConsoles.js","filterpeople.js","searchConsoles.js"];
+        context.jsscripts = ["deleteConsoles.js","searchConsoles.js"];
         var mysql = req.app.get('mysql');
         getConsoles(res, mysql, context, complete);
         function complete(){
@@ -55,11 +57,17 @@ module.exports = function(){
         }
     });
 
+
+    router.get('/search', function(req,res){
+        var context ={};
+        res.redirect('/consoles');
+    })
+
     
         router.get('/search/:s', function(req, res){
             var callbackCount = 0;
             var context = {};
-            context.jsscripts = ["deleteConsoles.js","filterpeople.js","searchConsoles.js"];
+            context.jsscripts = ["deleteConsoles.js","searchConsoles.js"];
             var mysql = req.app.get('mysql');
             getConsolesWithConsoleMainNameLike(req, res, mysql, context, complete);
             function complete(){
@@ -93,8 +101,7 @@ module.exports = function(){
             sql = mysql.pool.query(sql,inserts,function(error, results, fields){
                 if(error){
                     console.log(error)
-                    res.write(JSON.stringify(error));
-                    res.end();
+                    res.redirect('/errors');
                 }else{
                     res.status(200);
                     res.end();

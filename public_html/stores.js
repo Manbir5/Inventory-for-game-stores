@@ -2,6 +2,7 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
+
     function getStores(res, mysql, context, complete){
         mysql.pool.query("SELECT store_id, store_city FROM Stores", function(error, results, fields){
             if(error){
@@ -12,6 +13,7 @@ module.exports = function(){
             complete();
         });
     }
+
 
     function getConsoles(res, mysql, context, complete){
         mysql.pool.query("SELECT console_id as cid, console_main_name FROM Consoles", function(error, results, fields){
@@ -35,6 +37,7 @@ module.exports = function(){
             complete();
         });
     }
+
 
     function getStoresAndConsoles(res, mysql, context, complete){
         mysql.pool.query("SELECT store_id, console_id, quantity_of_console_at_store FROM Stores_Consoles", function(error, results, fields){
@@ -73,6 +76,7 @@ module.exports = function(){
           });
       }
   
+
       function getGamesForStoresLike(req, res, mysql, context, complete) {
         //sanitize the input as well as include the % character
          var query = "SELECT store_id, game_title, quantity_of_game_at_store FROM Stores_Games WHERE game_title LIKE " + mysql.pool.escape(req.params.s + '%');
@@ -87,7 +91,6 @@ module.exports = function(){
       }
   
 
-
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -99,7 +102,6 @@ module.exports = function(){
             if(callbackCount >= 1){
                 res.render('stores', context);
             }
-
         }
     });
 
@@ -107,7 +109,7 @@ module.exports = function(){
     router.get('/storesAndConsoles', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["filterpeople.js","searchStoresAndConsoles.js","deleteStoresAndConsoles.js"];
+        context.jsscripts = ["searchStoresAndConsoles.js","deleteStoresAndConsoles.js"];
         var mysql = req.app.get('mysql');
         getStoresAndConsoles(res, mysql, context, complete);
         getStores(res, mysql, context, complete);
@@ -120,10 +122,11 @@ module.exports = function(){
         }
     });
     
+
     router.get('/storesAndGames', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteStoresAndGames.js","filterpeople.js","searchStoresAndGames.js"];
+        context.jsscripts = ["deleteStoresAndGames.js","searchStoresAndGames.js"];
         var mysql = req.app.get('mysql');
         getStoresAndGames(res, mysql, context, complete);
         getStores(res, mysql, context, complete);
@@ -135,6 +138,7 @@ module.exports = function(){
             }
         }
     });
+
 
     router.post('/storesAndConsoles', function(req, res){
         console.log(req.body)
@@ -161,8 +165,7 @@ module.exports = function(){
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
-                res.write(JSON.stringify(error));
-                res.end();
+                res.redirect('/errors');
             }else{
                 res.redirect('/stores/storesAndGames');
             }
@@ -170,34 +173,51 @@ module.exports = function(){
     });
 
 
+    router.get('/storesAndConsoles/search', function(req,res){
+        var context ={};
+        res.redirect('/stores/storesAndConsoles');
+    })
+
 
     router.get('/storesAndConsoles/search/:s', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteStoresAndGames.js","filterpeople.js","searchStoresAndConsoles.js","deleteStoresAndConsoles.js"];
+        context.jsscripts = ["deleteStoresAndGames.js","searchStoresAndConsoles.js","deleteStoresAndConsoles.js"];
         var mysql = req.app.get('mysql');
         getConsolesForStoresLike(req, res, mysql, context, complete);
+        getStores(res, mysql, context, complete);
+        getConsoles(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 3){
                 res.render('storesAndConsoles', context);
             }
         }
     });
 
+
+    router.get('/storesAndGames/search', function(req,res){
+        var context ={};
+        res.redirect('/stores/storesAndGames');
+    })
+
+
     router.get('/storesAndGames/search/:s', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteStoresAndGames.js","filterpeople.js","searchStoresAndGames.js"];
+        context.jsscripts = ["deleteStoresAndGames.js", "searchStoresAndGames.js"];
         var mysql = req.app.get('mysql');
         getGamesForStoresLike(req, res, mysql, context, complete);
+        getStores(res, mysql, context, complete);
+        getGames(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 3){
                 res.render('storesAndGames', context);
             }
         }
     });
+
 
     router.delete('/:store_id', function(req, res){
         var mysql = req.app.get('mysql');
@@ -215,6 +235,7 @@ module.exports = function(){
         })
     });
 
+
     router.delete('/storesAndGames/:store_id/:game_title', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Stores_Games WHERE store_id = ? AND game_title = ?";
@@ -231,6 +252,7 @@ module.exports = function(){
         })
     });
 
+
     router.delete('/storesAndConsoles/:store_id/:console_id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Stores_Consoles WHERE store_id = ? AND console_id = ?";
@@ -246,9 +268,6 @@ module.exports = function(){
             }
         })
     });
-
-
-
 
     return router;
 }();

@@ -2,6 +2,7 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
+    
     function getRewards(res, mysql, context, complete){
         mysql.pool.query("SELECT account_number, customer_id, reward_point, order_id, redeemed_item FROM Customer_Reward_Programs", function(error, results, fields){
             if(error){
@@ -27,10 +28,11 @@ module.exports = function(){
           });
       }
 
+
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteperson.js","filterpeople.js","searchRewards.js","deleteRewards.js"];
+        context.jsscripts = ["searchRewards.js","deleteRewards.js"];
         var mysql = req.app.get('mysql');
         getRewards(res, mysql, context, complete);
         function complete(){
@@ -42,11 +44,17 @@ module.exports = function(){
         }
     });
 
+
+    router.get('/search', function(req,res){
+        var context ={};
+        res.redirect('/rewards');
+    })
+
     
     router.get('/search/:s', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteperson.js","filterpeople.js","searchRewards.js","deleteRewards.js"];
+        context.jsscripts = ["searchRewards.js","deleteRewards.js"];
         var mysql = req.app.get('mysql');
         getRewardsWithAccountNumberLike(req, res, mysql, context, complete);
         function complete(){
@@ -56,6 +64,7 @@ module.exports = function(){
             }
         }
     });
+
 
     router.delete('/:account_number', function(req, res){
         var mysql = req.app.get('mysql');
@@ -73,5 +82,6 @@ module.exports = function(){
         })
     });  
     
+
     return router;
 }();

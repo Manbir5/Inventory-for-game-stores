@@ -13,6 +13,7 @@ module.exports = function(){
         });
     }
 
+
     function getSingleCustomer(res, mysql, context, id, complete){
         var sql = " SELECT customer_id, customer_first_name, customer_last_name, customer_email, customer_phone_number, customer_address_street_number, customer_address_street_address, customer_address_unit, customer_address_city, customer_address_postal_code, customer_address_province, customer_address_country FROM Customers WHERE customer_id = ?";
         var inserts = [id];
@@ -41,12 +42,10 @@ module.exports = function(){
       }
   
 
-    /*Display all people. Requires web based javascript to delete users with AJAX*/
-
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteperson.js","filterpeople.js","searchCustomers.js","deleteCustomers.js"];
+        context.jsscripts = ["searchCustomers.js","deleteCustomers.js"];
         var mysql = req.app.get('mysql');
         getCustomers(res, mysql, context, complete);
         function complete(){
@@ -58,11 +57,17 @@ module.exports = function(){
         }
     });
 
+
+    router.get('/search', function(req,res){
+        var context ={};
+        res.redirect('/customers');
+    })
+
     
         router.get('/search/:s', function(req, res){
             var callbackCount = 0;
             var context = {};
-            context.jsscripts = ["filterpeople.js","searchCustomers.js","deleteCustomers.js"];
+            context.jsscripts = ["searchCustomers.js","deleteCustomers.js"];
             var mysql = req.app.get('mysql');
             getCustomersWithFirstNameLike(req, res, mysql, context, complete);
             function complete(){
@@ -95,8 +100,7 @@ module.exports = function(){
             sql = mysql.pool.query(sql,inserts,function(error, results, fields){
                 if(error){
                     console.log(error)
-                    res.write(JSON.stringify(error));
-                    res.end();
+                    res.redirect('/errors');
                 }else{
                     res.status(200);
                     res.end();

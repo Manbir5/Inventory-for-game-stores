@@ -33,7 +33,7 @@
     <thead>
       <tr>
         <th><label>Order Total* : </label>
-            <input type="number" name="order_total" size="20" maxlength="70" required>
+            <input type="number" name="order_total" size="20" maxlength="70" step="any", min="0" required>
         </th>
         <th><label>Game: </label><select name ='games'>
             {{#each games}}
@@ -42,14 +42,17 @@
             <option value ="">N/a</option>
             </select>
         </th>
-        <th><label>Store* : </label></label><select name ='stores' required>
+        <th><label>Store* : </label><select name ='stores' required>
             {{#each stores}}
             <option value={{sid}}>{{store_city}}</option>
             {{/each}}
             </select>
         </th>
-        <th><label>Customer ID* : </label>
-            <input type="number" name="customer_id" size="20" maxlength="100" required>
+        <th><label>Customer ID* : </label> <select name ='customers' required>
+            {{#each customers}}
+            <option value={{customer_id}}>{{customer_first_name}} {{customer_last_name}}</option>
+            {{/each}}
+            </select>
         </th>
         <th><label>Console: </label><select name ='consoles'>
             {{#each consoles}}

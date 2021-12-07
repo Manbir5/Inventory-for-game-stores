@@ -13,6 +13,7 @@ module.exports = function(){
         });
     }
 
+
     function getConsoles(res, mysql, context, complete){
         mysql.pool.query("SELECT console_id as cid, console_main_name FROM Consoles", function(error, results, fields){
             if(error){
@@ -24,6 +25,7 @@ module.exports = function(){
         });
     }
 
+
     function getGamesAndConsoles(res, mysql, context, complete){
         mysql.pool.query("SELECT console_id, game_title FROM Consoles_Games", function(error, results, fields){
             if(error){
@@ -34,6 +36,7 @@ module.exports = function(){
             complete();
         });
     }
+
 
     function getGamesWithGameTitleLike(req, res, mysql, context, complete) {
         //sanitize the input as well as include the % character
@@ -48,6 +51,7 @@ module.exports = function(){
           });
       }
 
+
       function getGamesForConsolesLike(req, res, mysql, context, complete) {
         //sanitize the input as well as include the % character
          var query = "SELECT console_id, game_title FROM Consoles_Games WHERE game_title LIKE " + mysql.pool.escape(req.params.s + '%');
@@ -60,6 +64,7 @@ module.exports = function(){
               complete();
           });
       };
+
 
       function getSingleGameAndConsoleRel(res, mysql, context, console_id, game_title, complete){
         var sql = " SELECT console_id, game_title FROM Consoles_Games WHERE console_id = ? AND game_title = ?";
@@ -74,10 +79,11 @@ module.exports = function(){
         });
     }
   
+
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteGames.js","filterpeople.js","searchGames.js","updateGamesAndConsoles.js"];
+        context.jsscripts = ["deleteGames.js","searchGames.js","updateGamesAndConsoles.js"];
         var mysql = req.app.get('mysql');
         getGames(res, mysql, context, complete);
         function complete(){
@@ -89,11 +95,17 @@ module.exports = function(){
         }
     });
 
+
+    router.get('/search', function(req,res){
+        var context ={};
+        res.redirect('/games');
+    })
+
     
         router.get('/search/:s', function(req, res){
             var callbackCount = 0;
             var context = {};
-            context.jsscripts = ["deleteGames.js","filterpeople.js","searchGames.js","updateGamesAndConsoles.js"];
+            context.jsscripts = ["deleteGames.js","searchGames.js","updateGamesAndConsoles.js"];
             var mysql = req.app.get('mysql');
             getGamesWithGameTitleLike(req, res, mysql, context, complete);
             function complete(){
@@ -108,7 +120,7 @@ module.exports = function(){
         router.get('/gamesAndConsoles', function(req, res){
             var callbackCount = 0;
             var context = {};
-            context.jsscripts = ["deleteGamesAndConsoles.js","filterpeople.js","searchGamesAndConsoles.js","updateGamesAndConsoles.js"];
+            context.jsscripts = ["deleteGamesAndConsoles.js","searchGamesAndConsoles.js","updateGamesAndConsoles.js","updateRoute.js"];
             var mysql = req.app.get('mysql');
             getGames(res, mysql, context, complete);
             getConsoles(res, mysql, context, complete);
@@ -137,6 +149,7 @@ module.exports = function(){
             })
         })
 
+
         router.post('/gamesAndConsoles', function(req, res){
             console.log(req.body)
             var mysql = req.app.get('mysql');
@@ -145,8 +158,7 @@ module.exports = function(){
             sql = mysql.pool.query(sql,inserts,function(error, results, fields){
                 if(error){
                     console.log(JSON.stringify(error))
-                    res.write(JSON.stringify(error));
-                    res.end();
+                    res.redirect('/errors');
                 }else{
                     res.redirect('/games/gamesAndConsoles');
                 }
@@ -154,50 +166,62 @@ module.exports = function(){
         });
 
 
+        router.get('/gamesAndConsoles/search', function(req,res){
+            var context ={};
+            res.redirect('/games/gamesAndConsoles');
+        })    
+
+
         router.get('/gamesAndConsoles/search/:s', function(req, res){
             var callbackCount = 0;
             var context = {};
-            context.jsscripts = ["deleteGamesAndConsoles.js","filterpeople.js","searchGamesAndConsoles.js","updateGamesAndConsoles.js"];
+            context.jsscripts = ["deleteGamesAndConsoles.js","searchGamesAndConsoles.js","updateGamesAndConsoles.js","updateRoute.js"];
             var mysql = req.app.get('mysql');
             getGamesForConsolesLike(req, res, mysql, context, complete);
+            getGames(res, mysql, context, complete);
+            getConsoles(res, mysql, context, complete);
             function complete(){
                 callbackCount++;
-                if(callbackCount >= 1){
+                if(callbackCount >= 3){
                     res.render('gamesAndConsoles', context);
                 }
             }
         });
 
+
         router.get('/gamesAndConsoles/:console_id/:game_title', function(req, res){
             callbackCount = 0;
             var context = {};
-            context.jsscripts = ["updateGamesAndConsoles.js"];
+            context.jsscripts = ["updateGamesAndConsoles.js","updateRoute.js", "selectGamesAndConsoles.js"];
             var mysql = req.app.get('mysql');
+            getGames(res, mysql, context, complete);
+            getConsoles(res, mysql, context, complete);
             getSingleGameAndConsoleRel(res, mysql, context, req.params.console_id, req.params.game_title, complete);
             function complete(){
                 callbackCount++;
-                if(callbackCount >= 1){
+                if(callbackCount >= 3){
                     res.render('updateGamesAndConsoles', context);
                 }
     
             }
         });
 
+
         router.put('/gamesAndConsoles/:console_id/:game_title', function(req, res){
             var mysql = req.app.get('mysql');
             var sql = "UPDATE Consoles_Games SET console_id = ?, game_title = ? WHERE console_id = ? AND game_title = ?";
-            var inserts = [req.params.console_id,req.params.game_title];
+            var inserts = [req.body.console_id,req.body.game_title,req.params.console_id,req.params.game_title];
             sql = mysql.pool.query(sql, inserts, function(error, results, fields){
                 if(error){
                     console.log(error)
-                    res.write(JSON.stringify(error));
                     res.status(400);
-                    res.end();
+                    res.redirect('/errors');
                 }else{
                     res.status(202).end();
                 }
             })
         });
+
 
         router.delete('/gamesAndConsoles/:console_id/:game_title', function(req, res){
             var mysql = req.app.get('mysql');
@@ -215,7 +239,6 @@ module.exports = function(){
             })
         });
 
-
-    
+        
     return router;
 }();

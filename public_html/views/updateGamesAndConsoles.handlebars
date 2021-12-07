@@ -24,7 +24,7 @@
 <br />
 
 
-<h2>Update {{getSingleGameAndConsoleRel.game_title}}:</h2>
+<h2>Update {{singleGameAndConsoleRel.game_title}}:</h2>
 
 <p>If left unchanged, the existing value will be used.</p>
 
@@ -33,11 +33,18 @@
         <table>
             <thead>
               <tr>
-                <th><label>Console ID: </label>
-                    <input type="" name="console_id"value="{{getSingleGameAndConsoleRel.console_id}}">
+                <th><label>Console:  </label>
+                    <select name ='console_id' id = "console-selector">
+                    {{#each consoles}}
+                    <option value={{cid}}>{{console_main_name}}</option>
+                    {{/each}}
+                    </select>
                 </th>
-                <th><label>Game title: </label>
-                    <input type="text" name="game_title" size="20" maxlength="70" value="{{getSingleGameAndConsoleRel.game_title}}}">
+                <th><label>Game title:  </label>
+                    <select name ='game_title' id = "game-selector">
+                    {{#each games}}
+                    <option value='{{game_title}}'>{{game_title}}</option>
+                    {{/each}}
                 </th>
               </tr>
             </thead>
@@ -46,7 +53,9 @@
           </table>
   <br />
   </form>
-    <button onclick ="updateGamesAndConsoles({{getSingleGameAndConsoleRel.console_id}},'{{getSingleGameAndConsoleRel.game_title}}')">Submit Changes</button>
+    <button onclick ="updateGamesAndConsoles({{singleGameAndConsoleRel.console_id}},'{{singleGameAndConsoleRel.game_title}}')">Submit Changes</button>
+    <script defer>selectConsole({{singleGameAndConsoleRel.console_id}});</script>
+    <script defer>selectGame('{{singleGameAndConsoleRel.game_title}}');</script>
 
 
 </body>

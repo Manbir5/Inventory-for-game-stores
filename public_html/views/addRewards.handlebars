@@ -27,18 +27,26 @@
         <table>
             <thead>
                 <tr>
-                    <th><label>Customer ID* :
-                        <input type="number" name="customer_id" required>
-                    </label></th>
-                    <th><label>Reward Points:
+                    <th><label>Customer* :</label>
+                        <select name ='customers' required>
+                        {{#each customers}}
+                        <option value={{customer_id}}>{{customer_first_name}} {{customer_last_name}}</option>
+                        {{/each}}
+                         </select>
+                </th>
+                    <th><label>Reward Points:</label>
                         <input type="number" name="rewards_points">
-                    </label></th>
-                    <th><label>Order ID* :
-                        <input type="number" name="order_id" required>
-                    </label></th>
-                    <th><label>Redeemed Item:
+                   </th>
+                    <th><label>Order ID* : </label>
+                        <select name ='orders' required>
+                        {{#each orders}}
+                        <option value={{order_id}}>{{order_id}}</option>
+                        {{/each}}
+                         </select>
+                    </th>
+                    <th><label>Redeemed Item: </label>
                         <input type="text" name="redeemed_item">
-                    </label></th>
+                   </th>
                 </tr>
             </thead>
             <tbody>
