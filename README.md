@@ -1,6 +1,6 @@
-# Game Inventory
+# Inventory for Game Stores
 
-This is a full stack application that represents the inventory of a game franchise.
+This is a full stack application that represents the inventory of a franchise.
 
 A database is used to store all of the users, games, consoles, stores and their corresponding information.
 
